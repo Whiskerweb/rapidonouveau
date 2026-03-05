@@ -1,26 +1,115 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 97.3%;
+    /* #F8F8F8 */
+    --foreground: 230 46% 20%;
+    /* #1C244B */
+    --card: 0 0% 100%;
+    --card-foreground: 230 46% 20%;
+    /* #1C244B */
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 46% 20%;
+    /* #1C244B */
+    --primary: 104 47% 55%;
+    /* #73C257 (Vert Rapido) */
+    --primary-foreground: 0 0% 100%;
+    /* Blanc */
+    --secondary: 230 46% 20%;
+    /* #1C244B (Bleu Rapido) */
+    --secondary-foreground: 0 0% 100%;
+    /* Blanc */
+    --muted: 228 14% 93%;
+    /* E8E9EE */
+    --muted-foreground: 228 11% 54%;
+    /* 757A99 */
+    --accent: 19 83% 60%;
+    /* #EF7B45 (Orange Rapido) */
+    --accent-foreground: 0 0% 100%;
+    /* Blanc */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 228 14% 93%;
+    /* E8E9EE */
+    --input: 228 14% 93%;
+    /* E8E9EE */
+    --ring: 230 46% 20%;
+    /* #1C244B */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 230 46% 20%;
+    /* #1C244B */
+    --foreground: 0 0% 97.3%;
+    /* #F8F8F8 */
+    --card: 230 46% 15%;
+    --card-foreground: 0 0% 97.3%;
+    --popover: 230 46% 15%;
+    --popover-foreground: 0 0% 97.3%;
+    --primary: 104 47% 55%;
+    /* #73C257 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 228 14% 93%;
+    --secondary-foreground: 230 46% 20%;
+    --muted: 230 46% 25%;
+    --muted-foreground: 228 11% 54%;
+    --accent: 19 83% 60%;
+    /* #EF7B45 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 230 46% 25%;
+    --input: 230 46% 25%;
+    --ring: 104 47% 55%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-normal;
+    font-family: var(--font-body), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-extrabold;
+    color: var(--foreground);
+    font-family: var(--font-heading), sans-serif;
+  }
+
+  /* Rapido Typography Scale */
+  h1 {
+    @apply text-4xl md:text-5xl tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl tracking-tight;
+  }
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 dark:bg-rapido-blue-900/70 dark:border-rapido-blue-800/50;
+  }
+
+  .card-shadow {
+    box-shadow: 0 4px 6px -1px rgba(28, 36, 75, 0.05);
+  }
 }
