@@ -1,6 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-import { checkUserAccess } from '@/lib/access'
+
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -35,15 +35,15 @@ export async function updateSession(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Protected routes for authenticated users
-  if (pathname.startsWith('/dashboard') || pathname.startsWith('/estimation') || pathname.startsWith('/estimations') || pathname.startsWith('/compte') || pathname.startsWith('/abonnement')) {
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/estimations') || pathname.startsWith('/compte') || pathname.startsWith('/abonnement') || pathname.startsWith('/notifications')) {
     if (!user) {
       const url = request.nextUrl.clone()
       url.pathname = '/connexion'
       return NextResponse.redirect(url)
     }
 
-    // Gating d'accès pour soumettre ou créer une estimation (PRD 17.2)
-    if (pathname.startsWith('/estimation')) {
+    // Gating d'accès pour créer une nouvelle estimation uniquement
+    if (pathname === '/estimations/nouveau') {
       // Here we need to check access. But we can't do it directly here safely without breaking
       // SSR rules if checkUserAccess creates its own cookies instance.
       // We will do a direct database check here in the middleware to avoid cookie conflicts.
@@ -105,6 +105,21 @@ export async function updateSession(request: NextRequest) {
     if (!profile || (profile.role !== 'admin' && profile.role !== 'super_admin')) {
       const url = request.nextUrl.clone()
       url.pathname = '/dashboard'
+      return NextResponse.redirect(url)
+    }
+  }
+
+  // Redirect to onboarding if profile_type is not set
+  if (user && !pathname.startsWith('/onboarding') && !pathname.startsWith('/api') && !pathname.startsWith('/connexion') && !pathname.startsWith('/inscription')) {
+    const { data: profileData } = await supabase
+      .from('profiles')
+      .select('profile_type')
+      .eq('id', user.id)
+      .single()
+
+    if (profileData && !profileData.profile_type) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/onboarding'
       return NextResponse.redirect(url)
     }
   }

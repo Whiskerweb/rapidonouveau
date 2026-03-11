@@ -1,111 +1,115 @@
+'use client';
+
 import { MarketingLayout } from '@/components/layout/marketing-layout';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
-const TEAM = [
-    { name: 'Équipe Fondatrice', role: 'Experts en immobilier & tech', initials: 'EF' },
-    { name: 'Pôle IA & Data', role: 'Ingénieurs en machine learning', initials: 'IA' },
-    { name: 'Experts Bâtiment', role: 'Artisans et économistes de la construction', initials: 'EB' },
-];
+import { motion } from 'framer-motion';
+import { Target, Zap, Shield, Eye, Users, Building2, Rocket, Heart } from 'lucide-react';
 
 const VALUES = [
-    { icon: '🎯', title: 'Précision', text: "Chaque estimation est vérifiée par des experts humains. Nous ne sacrifions jamais la qualité pour la vitesse." },
-    { icon: '⚡', title: 'Rapidité', text: "48h, c'est notre promesse. Parce que dans l'immobilier, le temps est de l'argent." },
-    { icon: '🤝', title: 'Transparence', text: "Tarifs clairs, processus lisible, sans surprise. Nous construisons une relation de confiance durable." },
-    { icon: '🔒', title: 'Confidentialité', text: "Vos données restent les vôtres. Stockage sécurisé en France, jamais revendues." },
+    { icon: Target, title: 'Précision Chiffrée', text: "L'IA calcule, l'humain valide. Cette double couche garantit un taux d'erreur proche de zéro pour vos dossiers financiers." },
+    { icon: Zap, title: 'Vitesse de Réaction', text: "Le temps est votre ressource la plus précieuse. Nous livrons en 48h maximum pour que vous ne ratiez aucune opportunité." },
+    { icon: Shield, title: 'Conformité Bancaire', text: "Nos rapports ne sont pas de simples estimations, ce sont des documents structurés acceptés par les courtiers et les banques." },
+    { icon: Eye, title: 'Transparence Radicale', text: "Pas d'abonnement caché, pas de jargon complexe. Nous parlons le langage des artisans et de la tech." },
+];
+
+const TIMELINE = [
+    { year: '2023', title: 'La Genèse', desc: "Rencontre entre un maître d'œuvre et un expert en IA. Le prototype de Scan IA est né." },
+    { year: '2024', title: 'Lancement Pro', desc: "Ouverture de la plateforme aux premiers agents immobiliers et marchands de biens." },
+    { year: '2025', title: 'Expertise Humaine', desc: "Intégration systématique de la validation par des économistes de la construction." },
+    { year: '2026', title: 'Expansion 2.0', desc: "Lancement de la solution mobile et de l'IA générative spécialisée par métier." },
 ];
 
 export default function AProposPage() {
     return (
         <MarketingLayout>
-
-            {/* HERO */}
-            <section className="bg-background pt-16 pb-16 md:pt-24">
-                <div className="container px-4 md:px-6 flex flex-col items-center text-center space-y-6 max-w-3xl mx-auto">
-                    <Badge variant="outline" className="rounded-full">À Propos</Badge>
-                    <h1 className="text-4xl font-heading font-extrabold sm:text-5xl text-rapido-blue">
-                        Notre mission : démocratiser<br />l&apos;estimation travaux.
-                    </h1>
-                    <p className="text-zinc-500 md:text-xl leading-relaxed">
-                        Rapido&apos;Devis est né d&apos;un constat simple : obtenir une estimation de travaux fiable était
-                        trop long, trop cher et trop opaque pour les professionnels de l&apos;immobilier.
-                        Nous avons décidé de changer ça.
-                    </p>
+            {/* Mission Hero */}
+            <section className="relative pt-40 pb-32 overflow-hidden bg-white">
+                <div className="container relative z-10 px-4">
+                    <div className="max-w-4xl mx-auto text-center space-y-8">
+                        <Badge className="bg-primary/10 text-primary border-primary/20 px-6 py-2 rounded-full font-black text-[10px] tracking-[0.3em] uppercase">
+                            Notre Mission
+                        </Badge>
+                        <h1 className="text-5xl md:text-8xl font-heading font-black text-secondary leading-[0.9] tracking-tighter">
+                            Démocratiser l&apos;expertise <br />
+                            <span className="text-primary italic">du bâtiment.</span>
+                        </h1>
+                        <p className="text-secondary/50 text-xl md:text-2xl font-bold leading-relaxed max-w-2xl mx-auto">
+                            Rapido&apos;Devis est né pour supprimer la barrière entre l&apos;idée de travaux et son estimation chiffrée réelle.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* STORY */}
-            <section className="bg-zinc-50 py-20">
-                <div className="container px-4 md:px-6 grid gap-12 lg:grid-cols-2 items-center max-w-5xl mx-auto">
-                    <div className="space-y-6">
-                        <h2 className="text-3xl font-heading font-extrabold text-rapido-blue">Notre histoire</h2>
-                        <div className="space-y-4 text-zinc-600 leading-relaxed">
-                            <p>
-                                Fondé par des professionnels de l&apos;immobilier et de la tech, Rapido&apos;Devis a vu le
-                                jour en 2023 avec une conviction : les technologies d&apos;IA pouvaient transformer
-                                radicalement la façon dont les professionnels estiment les travaux.
-                            </p>
-                            <p>
-                                Après avoir testé notre solution avec des agents immobiliers, promoteurs et
-                                architectes, nous avons affiné notre approche pour combiner la puissance de
-                                l&apos;IA avec l&apos;expertise irremplaçable des professionnels du bâtiment.
-                            </p>
-                            <p>
-                                Aujourd&apos;hui, plus de 1 000 professionnels utilisent Rapido&apos;Devis chaque mois pour
-                                gagner du temps, impressionner leurs clients et prendre de meilleures décisions.
+            {/* Values Grid */}
+            <section className="py-32 bg-[#F9FBFF]">
+                <div className="container px-4">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {VALUES.map((v, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white p-10 rounded-[3rem] shadow-sm border border-zinc-100 hover:shadow-xl transition-all group"
+                            >
+                                <div className="w-14 h-14 rounded-2xl bg-secondary text-primary flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                                    <v.icon className="w-7 h-7" />
+                                </div>
+                                <h3 className="text-2xl font-black text-secondary mb-4">{v.title}</h3>
+                                <p className="text-secondary/40 font-bold leading-relaxed">{v.text}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Timeline Section */}
+            <section className="py-40 bg-white overflow-hidden">
+                <div className="container px-4">
+                    <div className="flex flex-col lg:flex-row gap-20 items-center">
+                        <div className="lg:w-1/3 space-y-8">
+                            <h2 className="text-5xl font-heading font-black text-secondary leading-tight">
+                                Notre <br />
+                                <span className="text-primary italic">évolution.</span>
+                            </h2>
+                            <p className="text-secondary/50 text-xl font-bold leading-relaxed">
+                                De l&apos;idée brute à l&apos;outil de référence pour des milliers de professionnels.
                             </p>
                         </div>
-                    </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        {[
-                            { value: '2023', label: 'Année de création' },
-                            { value: '+1 000', label: 'Professionnels' },
-                            { value: '+10 000', label: 'Devis générés' },
-                            { value: '98%', label: 'Satisfaction' },
-                        ].map((s) => (
-                            <div key={s.label} className="rounded-2xl bg-rapido-blue p-6 text-center text-white">
-                                <p className="font-heading text-3xl font-extrabold">{s.value}</p>
-                                <p className="text-rapido-blue-200 text-sm mt-1">{s.label}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* VALUES */}
-            <section className="py-20">
-                <div className="container px-4 md:px-6 max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-heading font-extrabold text-rapido-blue text-center mb-12">
-                        Nos valeurs
-                    </h2>
-                    <div className="grid gap-6 sm:grid-cols-2">
-                        {VALUES.map((v, i) => (
-                            <div key={i} className="rounded-2xl border border-zinc-100 bg-white p-6 space-y-3 shadow-sm">
-                                <div className="text-3xl">{v.icon}</div>
-                                <h3 className="font-bold text-rapido-blue">{v.title}</h3>
-                                <p className="text-zinc-500 text-sm leading-relaxed">{v.text}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* TEAM */}
-            <section className="bg-zinc-50 py-20">
-                <div className="container px-4 md:px-6 max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-heading font-extrabold text-rapido-blue text-center mb-12">
-                        Notre équipe
-                    </h2>
-                    <div className="grid gap-6 sm:grid-cols-3">
-                        {TEAM.map((m, i) => (
-                            <div key={i} className="flex flex-col items-center text-center space-y-3 rounded-2xl bg-white border border-zinc-100 p-8 shadow-sm">
-                                <div className="h-16 w-16 rounded-full bg-rapido-blue flex items-center justify-center font-heading font-bold text-white">
-                                    {m.initials}
+                        <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-10">
+                            {TIMELINE.map((item, i) => (
+                                <div key={i} className="relative p-10 rounded-[3rem] bg-zinc-50 border border-zinc-100 space-y-4">
+                                    <span className="text-5xl font-heading font-black text-primary/20">{item.year}</span>
+                                    <h4 className="text-2xl font-black text-secondary">{item.title}</h4>
+                                    <p className="text-secondary/40 font-bold">{item.desc}</p>
                                 </div>
-                                <p className="font-semibold text-rapido-blue">{m.name}</p>
-                                <p className="text-zinc-500 text-sm">{m.role}</p>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Vision / Team Numbers */}
+            <section className="py-32 bg-secondary text-white relative">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,200,83,0.1)_0%,transparent_70%)] opacity-30" />
+                <div className="container relative z-10 px-4">
+                    <div className="grid md:grid-cols-4 gap-12 text-center">
+                        {[
+                            { icon: Users, value: '21 000+', label: 'Utilisateurs' },
+                            { icon: Building2, value: '15+', label: 'Métiers couverts' },
+                            { icon: Rocket, value: '48h', label: 'Délai garanti' },
+                            { icon: Heart, value: '4.8/5', label: 'Satisfaction' },
+                        ].map((stat, i) => (
+                            <div key={i} className="space-y-4">
+                                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-6">
+                                    <stat.icon className="w-6 h-6 text-primary" />
+                                </div>
+                                <p className="text-5xl font-heading font-black text-primary">{stat.value}</p>
+                                <p className="text-xs font-black uppercase tracking-[0.3em] opacity-40">{stat.label}</p>
                             </div>
                         ))}
                     </div>
@@ -113,26 +117,29 @@ export default function AProposPage() {
             </section>
 
             {/* CTA */}
-            <section className="bg-rapido-blue py-16">
-                <div className="container px-4 md:px-6 flex flex-col items-center text-center space-y-6">
-                    <h2 className="text-3xl font-heading font-extrabold text-white">
-                        Rejoignez l&apos;aventure Rapido&apos;Devis
-                    </h2>
-                    <div className="flex gap-4">
-                        <Link href="/inscription">
-                            <Button size="lg" className="bg-rapido-green text-white rounded-full px-8">
-                                Commencer →
-                            </Button>
-                        </Link>
-                        <Link href="/contact">
-                            <Button size="lg" variant="outline" className="rounded-full px-8 border-white/30 text-white hover:bg-white/10">
-                                Nous contacter
-                            </Button>
-                        </Link>
+            <section className="py-40 bg-white">
+                <div className="container px-4">
+                    <div className="bg-zinc-50 rounded-[4rem] p-12 md:p-24 text-center space-y-12 relative overflow-hidden">
+                        <h2 className="text-4xl md:text-7xl font-heading font-black text-secondary leading-tight relative z-10">
+                            Prêt à nous rejoindre <br />
+                            dans cette <span className="text-primary italic">aventure ?</span>
+                        </h2>
+
+                        <div className="flex flex-col sm:flex-row justify-center items-center gap-6 relative z-10">
+                            <Link href="/inscription" className="w-full sm:w-auto">
+                                <Button size="lg" className="h-20 w-full bg-primary hover:bg-primary/95 text-white font-black rounded-3xl px-16 text-2xl shadow-2xl transition-all hover:scale-105">
+                                    Essayer l&apos;outil
+                                </Button>
+                            </Link>
+                            <Link href="/contact" className="w-full sm:w-auto">
+                                <Button size="lg" variant="outline" className="h-20 w-full rounded-3xl border-secondary/10 text-secondary bg-white hover:bg-zinc-50 px-16 text-2xl font-black">
+                                    Poser une question
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>
-
         </MarketingLayout>
     );
 }
