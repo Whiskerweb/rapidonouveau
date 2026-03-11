@@ -23,6 +23,7 @@ const NAV_ITEMS = [
 const ARTISAN_NAV_ITEMS = [
     { href: '/artisan/demandes', icon: 'Hammer', label: 'Demandes' },
     { href: '/artisan/facturation', icon: 'Receipt', label: 'Facturation' },
+    { href: '/artisan/facturation/bibliotheque', icon: 'BookOpen', label: 'Bibliothèque' },
 ];
 
 export default async function DashboardLayout({

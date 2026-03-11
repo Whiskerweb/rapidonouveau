@@ -43,6 +43,7 @@ export function LineItemEditor({ lines, onChange, readOnly }: LineItemEditorProp
       unit_price_ht: preset?.unit_price_ht || 0,
       tva_rate: preset?.tva_rate || 20,
       library_item_id: preset?.library_item_id || null,
+      cost_price: preset?.cost_price ?? null,
     }
     onChange([...lines, newLine])
   }
@@ -143,8 +144,23 @@ export function LineItemEditor({ lines, onChange, readOnly }: LineItemEditorProp
                 unit: item.unit,
                 unit_price_ht: item.unit_price_ht,
                 tva_rate: item.tva_rate,
-                library_item_id: item.id,
+                library_item_id: item.id.startsWith('catalog-') ? null : item.id,
+                cost_price: item.cost_price ?? null,
               })}
+              onMultiSelect={(items) => {
+                const newLines = items.map((item, i) => ({
+                  sort_order: lines.length + i + 1,
+                  designation: item.designation,
+                  description: item.description,
+                  unit: item.unit,
+                  quantity: 1,
+                  unit_price_ht: item.unit_price_ht,
+                  tva_rate: item.tva_rate,
+                  library_item_id: item.id.startsWith('catalog-') ? null : item.id,
+                  cost_price: item.cost_price ?? null,
+                }))
+                onChange([...lines, ...newLines])
+              }}
             />
             <button
               type="button"
